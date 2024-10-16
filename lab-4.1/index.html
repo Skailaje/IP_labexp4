@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customized T-Shirt Order Form</title>
+    <style>
+      /* General styles */
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 0;
+        color: #333;
+       
+      }
+
+      header {
+        background-color: #ffffff;
+        color: rgb(19, 8, 70);
+        padding: 20px;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0px 2px 8px black;
+      }
+
+      header img {
+        float: left;
+        margin-right: 20px;
+        margin-top:0px;
+      }
+
+      header h1 {
+        font-size: 2.5em;
+        margin: 0;
+        line-height: 1.5;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      /* Hero section */
+      .hero {
+        background-image: url('tshirt-hero.jpg'); /* Replace with an actual image URL */
+        background-size: cover;
+        background-position: center;
+        padding: 100px 20px;
+        text-align: center;
+        color: white;
+      }
+
+      .hero h2 {
+        font-size: 3em;
+        font-weight: bold;
+        margin: 0;
+        color: #0f075a;
+      }
+
+      .hero p {
+        font-size: 1.5em;
+        margin: 10px 0 30px;
+        color: #0f075a;
+      }
+
+      .hero button {
+        padding: 2px 5px;
+        font-size: 1.5em;
+        background-color: #ff5e00;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .hero button:hover {
+        background-color: #e04d00;
+      }
+
+      /* Design section */
+      .designs {
+        padding: 50px 20px;
+        text-align: center;
+      }
+
+      .designs h2 {
+        font-size: 2.5em;
+        color: #0f075a;
+        margin-bottom: 20px;
+      }
+
+      .designs p {
+        font-size: 1.2em;
+        color: #555;
+        margin-bottom: 30px;
+      }
+
+      .design-grid {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .design-item {
+        background-color: #ffffff;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+      }
+
+      .design-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      .design-item h3 {
+        font-size: 1.5em;
+        color: #0f075a;
+        margin: 15px 0;
+      }
+
+      .design-item button {
+        padding: 10px 20px;
+        font-size: 1.1em;
+        background-color: #ff5e00;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .design-item button:hover {
+        background-color: #e04d00;
+      }
+
+      /* Form container */
+      form {
+        width: 70%;
+        background-color: #ffffff;
+        margin: 30px auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Div container for each section */
+      .section {
+        margin-bottom: 25px;
+      }
+
+      .section h2 {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #0f075a;
+        border-bottom: 3px solid #ff5e00;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+      }
+
+      /* Styling form elements */
+      label {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        display: block;
+        color: #555;
+      }
+
+      input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 1em;
+        transition: 0.3s;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      input:focus, select:focus, textarea:focus {
+        border-color: #ff5e00;
+        outline: none;
+        box-shadow: 0 0 8px rgba(255, 94, 0, 0.5);
+      }
+
+      /* Button styling */
+      button {
+        background-color: #ff5e00;
+        color: white;
+        padding: 10px 5px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 15px;
+        width: 20%;
+      }
+
+      button:hover {
+        background-color: #e04d00;
+      }
+
+      /* Modal Styles */
+      #receiptModal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      #receiptModalContent {
+        background-color: #fff;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 60%;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .closeModal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .closeModal:hover, .closeModal:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      #receiptContent {
+        font-size: 1.2em;
+        margin-top: 10px;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #0f075a;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      footer a {
+        color: #ff5e00;
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 768px) {
+        form {
+          width: 95%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="tshirtlogo.png" alt="Company Logo" width="80" height="auto" />
+      <h1>Welcome to Our Website</h1>
+    </header>
+
+    
+    
+    <!-- Hero Section -->
+    <div bgcolor="#ff5e00">
+      <table align="center" cellpadding="20" cellspacing="0" border="1" bordercolor="white" bgcolor="#ffffff">
+        <tr>
+          <td>
+            <p align="center"><font size="7" color="#ff5e00">You think, we print. unmatched quality, unique design!</font></p>
+          </td>
+          <td>
+            <img src="bgimg.png" alt="tshirt" width="500" height="auto">
+            <br/>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <hr/>
+
+    <section class="hero">
+      <h2>Design Your Perfect T-Shirt</h2>
+      <p>Create your customized T-shirt now, and stand out from the crowd!</p>
+      <a href="#orderForm"><button>Get Started</button></a>
+    </section>
+
+    <hr/>
+
+    <!-- Designs Section -->
+    <section class="designs">
+      <h2>Our Popular Designs</h2>
+      <p>Choose from our best-selling designs or create your own personalized version.</p>
+      <div class="design-grid">
+
+        <div class="design-item">
+          <img src="t4.jpg" alt="Design 1" />
+          <h3>Classic Logo T-Shirt</h3>
+        </div>
+
+        <div class="design-item">
+          <img src="t2.jpg" alt="Design 2" />
+          <h3>Vintage Style Tee</h3>
+        </div>
+
+        <div class="design-item">
+          <img src="t3.jpg" alt="Design 3" />
+          <h3>Minimalist T-Shirt</h3>
+        </div>
+        
+      </div>
+    </section>
+
+    
+
+
+    <!-- Order Form -->
+    <form id="orderForm">
+      <div class="section">
+        <h2>Customize Your T-Shirt</h2>
+        <label for="tagline">Tagline on the Shirt:</label>
+        <input type="text" id="tagline" name="tagline" required />
+
+        <label for="color">Select Color:</label>
+        <select id="color" name="color" required>
+          <option value="black">Black</option>
+          <option value="white">White</option>
+          <option value="blue">Blue</option>
+          <option value="green">Green</option>
+          <option value="Red">Green</option>
+          <option value="yellow">Green</option>
+          <option value="pink">Green</option>
+          <option value="purple">Green</option>
+          <option value="teal">Green</option>
+        </select>
+
+        <label for="size">Select Size:</label>
+        <select id="size" name="size" required>
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+          <option value="xlarge">X-Large</option>
+          <option value="xxlarge">X-Large</option>
+        </select>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" required min="1" />
+      </div>
+
+      <div class="section">
+        <h2>Delivery Details</h2>
+        <label for="deliveryDate">Delivery Date:</label>
+        <input type="date" id="deliveryDate" name="deliveryDate" required />
+
+        <label for="name">Recipient's Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="address">Delivery Address:</label>
+        <textarea id="address" name="address" rows="4" required></textarea>
+      </div>
+
+      <div class="section">
+        <h2>Additional Information</h2>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" placeholder="Enter 10-digit phone number" />
+
+        <label for="comments">Additional Comments:</label>
+        <textarea id="comments" name="comments" rows="4"></textarea>
+      </div>
+
+      <button type="submit">Place Order</button>
+      <button type="reset">Clear</button>
+    </form>
+
+    <!-- Receipt Modal -->
+    <div id="receiptModal">
+      <div id="receiptModalContent">
+        <span class="closeModal">&times;</span>
+        <h2>Order Receipt</h2>
+        <div id="receiptContent"></div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Customized T-Shirts. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Form validation function
+        function validateForm() {
+          const phone = document.getElementById('phone').value;
+          const email = document.getElementById('email').value;
+          const phonePattern = /^[0-9]{10}$/;
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          // Phone validation
+          if (!phonePattern.test(phone)) {
+            alert('Please enter a valid 10-digit phone number.');
+            return false;
+          }
+
+          // Email validation
+          if (!emailPattern.test(email)) {
+            alert('Please enter a valid email address.');
+            return false;
+          }
+
+          return true;
+        }
+
+        // Process Order and Generate Receipt
+        function processOrder(event) {
+          event.preventDefault();
+
+          if (!validateForm()) {
+            return;
+          }
+
+          // Get form values
+          const tagline = document.getElementById('tagline').value;
+          const color = document.getElementById('color').value;
+          const size = document.getElementById('size').value;
+          const quantity = document.getElementById('quantity').value;
+          const deliveryDate = document.getElementById('deliveryDate').value;
+          const name = document.getElementById('name').value;
+          const address = document.getElementById('address').value;
+          const email = document.getElementById('email').value;
+          const phone = document.getElementById('phone').value;
+          const comments = document.getElementById('comments').value || 'No comments provided';
+          const date = new Date();
+
+          // Generate Receipt
+          const receiptContent = `
+            <p><strong>Tagline:</strong> ${tagline}</p>
+            <p><strong>Color:</strong> ${color}</p>
+            <p><strong>Size:</strong> ${size}</p>
+            <p><strong>Quantity:</strong> ${quantity}</p>
+            <p><strong>Delivery Date:</strong> ${deliveryDate}</p>
+            <p><strong>Recipient's Name:</strong> ${name}</p>
+            <p><strong>Address:</strong> ${address}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Phone:</strong> ${phone}</p>
+            <p><strong>Comments:</strong> ${comments}</p>
+            <p><strong>Order Date:</strong> ${date.toLocaleDateString()}</p>
+          `;
+
+          // Show modal and insert receipt content
+          document.getElementById('receiptContent').innerHTML = receiptContent;
+          const modal = document.getElementById('receiptModal');
+          modal.style.display = 'block';
+
+          // Close the modal when clicking the 'X'
+          const closeModal = document.querySelector('.closeModal');
+          closeModal.onclick = function () {
+            modal.style.display = 'none';
+          };
+
+          // Close the modal when clicking outside of the modal content
+          window.onclick = function (event) {
+            if (event.target === modal) {
+              modal.style.display = 'none';
+            }
+          };
+        }
+
+        // Attach event listener to the form
+        const form = document.getElementById('orderForm');
+        form.addEventListener('submit', processOrder);
+      });
+    </script>
+  </body>
+</html>
